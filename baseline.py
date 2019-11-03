@@ -22,7 +22,7 @@ def baseline(R,I,It):
     print("...")
     test_loss= tf.math.reduce_sum( tf.where(It, sqd, zero) )/_TL
     print("...")
-    train = tf.train.AdamOptimizer(learning_rate=0.1).minimize(loss+0.001*cost)
+    train = tf.train.AdamOptimizer(learning_rate=0.1).minimize(loss+0.0001*cost)
 
     print("...")
     
@@ -54,13 +54,15 @@ def weightbase(R,I,It,bm,bg,bu,weightlist):
     
     print("...")
     
+    cost=tf.math.reduce_variance(cw)
+    print("...")
     sqd = tf.squared_difference(R,Rp)
     print("...")
     loss = tf.math.reduce_sum( tf.where(I, sqd, zero) )/_IL
     print("...")
     test_loss= tf.math.reduce_sum( tf.where(It, sqd, zero) )/_TL
     print("...")
-    train = tf.train.AdamOptimizer(learning_rate=0.1).minimize(loss)
+    train = tf.train.AdamOptimizer(learning_rate=0.1).minimize(loss+0.001*cost)
 
     print("...")
     

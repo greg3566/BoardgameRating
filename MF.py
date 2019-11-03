@@ -51,7 +51,7 @@ def WALS(R,I,It,bm,bg,bu,_N):
     
     print("initiated")
     
-    for i in range(16):
+    for i in range(32):
         sess.run(model.row_update_prep_gramian_op)
         print("",end="-")
         sess.run(model.initialize_row_update_op)
