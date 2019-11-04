@@ -42,7 +42,7 @@ def gatherUsersFromManyRatedGames(gamepages,userpages):
             urlhead+=str(game)+","
         urlhead=urlhead[:-1]
         for upi in range(userpages):
-            url=urlhead+"&type=boardgame,boardgameexpansion&ratingcomments=1&page="+str(lastpage-upi)+"&pagesize=100"
+            url=urlhead+"&type=boardgame&ratingcomments=1&page="+str(lastpage-upi)+"&pagesize=100"
             print(url)
             infos=gatherFromUrl(url,"comment")
             usermap=map(lambda x: x.get("username"),infos)
@@ -56,7 +56,7 @@ def gatherRatingsFromUser(userlist,uid,R,I,It,gamelist):
     # userlist에 있는 유저 하나로부터 평가한 게임들과 평가를 가져옵니다.
     
     urlhead="https://www.boardgamegeek.com/xmlapi2/collection?username="
-    url=urlhead+userlist[uid]+"&subtype=boardgame&stats=1&rated=1"
+    url=urlhead+userlist[uid]+"&subtype=boardgame&excludesubtype=boardgameexpansion&stats=1&rated=1"
     infos=gatherFromUrl(url,"item",notyet=1)
     for item in infos:
         game=item.get("objectid")

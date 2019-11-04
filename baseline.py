@@ -14,7 +14,7 @@ def baseline(R,I,It):
     
     print("...")
     
-    cost = tf.math.reduce_variance(bg)+tf.math.reduce_variance(bu)
+    cost = tf.math.reduce_mean(bg**2)+tf.math.reduce_mean(bu**2)
     print("...")
     sqd = tf.squared_difference(R,bias)
     print("...")

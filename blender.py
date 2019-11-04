@@ -1,7 +1,7 @@
 import numpy as np
 import tensorflow as tf
 
-def blend(R,I,It,Rps):
+def blend(R,I,It,Rps,initial=None):
     _IL = np.sum(I)
     _TL = np.sum(It)
     _PL = len(Rps)
@@ -12,7 +12,10 @@ def blend(R,I,It,Rps):
         print( np.sum(It*(R-Rp)**2)/_TL, end=' ')
     print("")
     
-    ratios=tf.Variable( tf.random.normal((_PL,), mean=1.0/_PL, stddev=0.1/_PL) )
+    if initial==None:
+        ratios=tf.Variable( tf.random.normal((_PL,), mean=1.0/_PL, stddev=0.1/_PL) )
+    else:
+        ratios=tf.Variable( initial, dtype=tf.float32 )
     
     x=Rps*ratios[:,tf.newaxis,tf.newaxis]
     Rp=tf.math.reduce_sum(x,axis=0)
